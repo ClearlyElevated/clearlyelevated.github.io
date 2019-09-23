@@ -1,0 +1,29 @@
+{
+  "name": "hastebin-plus",
+  "version": "0.0.4",
+  "private": true,
+  "description": "Hastebin Plus is an open-source Pastebin software written in node.js.",
+  "keywords": [
+    "paste",
+    "pastebin",
+    "haste",
+    "hastebin",
+    "code",
+    "syntax highlighting"
+  ],
+  "author": {
+    "name": "Marvin Menzerath",
+    "email": "github@marvin-menzerath.de",
+    "url": "https://marvin-menzerath.de/"
+  },
+  "license": "MIT",
+  "dependencies": {
+    "clean-css": "^4.2.1",
+    "express": "^4.16.4",
+    "uglify-js": "^3.6.0",
+    "winston": "^3.2.1"
+  },
+  "scripts": {
+    "start": "node ./server.js"
+  }
+}
