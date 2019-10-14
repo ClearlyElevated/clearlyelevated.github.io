@@ -1,0 +1,196 @@
+<% thebot.data = thebot %>
+<%- include('../blocks/header', { bot, user, title: thebot.data.name, embedding: { default: false } }) %>
+<meta name="description" content="<%= thebot.data.shortDesc %>">
+<meta name="og:title" property="og:title" content="<%= thebot.data.name %> | Discord Bot House">
+<meta name="og:description" property="og:description" content="<%= thebot.data.shortDesc %>">
+<meta name="twitter:card" content="<%= thebot.data.shortDesc %>">
+<meta property="og:image" content="<%= bot.users.get(thebot.id).displayAvatarURL({size:512,format:'png'}) %>">
+<% const htmlFor = {
+  "online": "Online",
+  "idle": "Idle",
+  "dnd": "DND",
+  "offline": "Offline"
+}; %>
+
+ <% if (alertSuccess) { %>
+  <div style="margin-left: 10%; margin-right: 10%;" class="alert alert-success" role="alert">
+    <%- alertSuccess %>
+  </div>
+<% } %>
+
+<% if (alertFail) { %>
+  <div style="margin-left: 10%; margin-right: 10%;" class="alert alert-danger" role="alert">
+    <%- alertFail %>
+  </div>
+<% } %>
+
+<style media="screen">
+.btn {
+	margin-top: 0px !important
+}
+</style>
+
+<div class="container" style="margin-top: 30px; border-radius: 2px 2px 2px 2px!important; width: 100%;">
+    <div class="profile-head main-bkg-a " style="border-radius: 10px;">
+        <div class="col-md- col-sm-4 col-xs-12">
+            <img src="<%= bot.users.get(thebot.id).displayAvatarURL({size:512,format:'png'}) %>" class="img-responsive rounded-circle p-1"/>
+					<center>
+						<h6><%= thebot.data.name %></h6>
+						<span class="<%= bot.users.get(thebot.id).presence.status %>">• <%= htmlFor[bot.users.get(thebot.id).presence.status] %></span>
+						<span class="btn btn-lg" style="margin-top:0px;margin-bottom:0px;"><i class="fas fa-chevron-up"></i>  <%= thebot.data.upvotes.toLocaleString() %></span><br>
+						<p></p>	<p></p>
+						<a class="label label-primary" style="color:white; background-color: #184f57;"><%= thebot.data.serverCount %> Servers</a>
+						<a class="label label-primary" style="color:white; background-color: #184f57;"><%= thebot.data.shardCount %> Shard(s)</a><br>
+						<% if(user && thebot.data.mainOwner == user.id || user && thebot.data.owners.includes(user.id) ) { %>
+						<p></p>	<p></p>
+						<a class="btn w-25" href="/bot/<%= thebot.data.id %>/delete" style=" background-color: #dc3545;"><span class="fa fa-trash"></span> Delete</a>
+						<a class="btn w-25" style=" background-color: #ffc107;" href="/bot/<%= thebot.data.id %>/edit"><span class="fa fa-pencil"></span> Edit</a>
+				  	<% }; %>
+					</center>
+
+        </div>
+
+        <div class="col-md-5 col-sm-5 col-xs-12">
+            <h5><%= thebot.data.name %></h5>
+						<p><% if (thebot.data.certified === true) { %> Certified Bot <% } else { %> Bot <% } %></p>
+            <ul>
+                <li><p style="word-break: break-word;color:white;"></p><%= thebot.data.shortDesc %></li>
+                <li><p style="color:white;">Bot Prefix: <span><code><%= thebot.data.prefix %></code></span></p></li>
+								<li><p>Library: <span><code><%= thebot.data.library %></code></p></li>
+						    <li><% if(thebot.data.website !== "none" ) {%>
+									<button  onclick="window.location.href = '<%= thebot.data.website %>';" style=" background-color: #184f57;" type="button" class="btn">Visit Website</button>
+				<% }%>
+        <% if(thebot.data.github !== "none" ) {%>
+          <button  onclick="window.location.href = '<%= thebot.data.website %>';" style=" background-color: #184f57;" type="button" class="btn">Visit GitHub</button>
+        <% }%>
+				<button  onclick="window.location.href = '<%= thebot.data.server %>';" style=" background-color: #184f57;"type="button" class="btn">Join Server</button></li>
+				<li>
+          <a href="<%= thebot.data.invite %>" style=" background-color: #184f57;" class="btn w-25">Invite</a>
+          <a href='/bot/<%= thebot.data.id %>/vote' cmethod="post" type="text" value="vote" style="  background-color: #184f57;" class="btn w-25">Vote</a>
+          <a  style="background-color: #184f57; padding:  10px 5px;" class="btn w-25" data-toggle="modal" data-target="#reportModal">Report</a>
+        </li>
+      </ul>
+      <fieldset class="rating">
+          <% const rated = []
+          for (var i = 0; i < thebot.data.rates.length; i++) {
+            rated.push(thebot.data.rates[i].rate)
+          }
+          if (rated.length == 0) rated.push(0)
+          let sum = rated.reduce((previous, current) => current += previous);
+          let avg = sum / rated.length;
+          %>
+        <input onclick="window.location.href ='/bot/<%= thebot.data.id %>/rate?stars=5'" type="radio" id="star5" name="rating" value="5" /><label class = "full" for="star5" title="Awesome"></label>
+        <input onclick="window.location.href ='/bot/<%= thebot.data.id %>/rate?stars=4'"  type="radio" id="star4" name="rating" value="4" /><label class = "full" for="star4" title="Pretty good"></label>
+        <input onclick="window.location.href ='/bot/<%= thebot.data.id %>/rate?stars=3'"  type="radio" id="star3" name="rating" value="3" /><label class = "full" for="star3" title="Not Bad"></label>
+        <input onclick="window.location.href ='/bot/<%= thebot.data.id %>/rate?stars=2'"  type="radio" id="star2" name="rating" value="2" /><label class = "full" for="star2" title="Kinda bad"></label>
+        <input onclick="window.location.href ='/bot/<%= thebot.data.id %>/rate?stars=1'"  type="radio" id="star1" name="rating" value="1" /><label class = "full" for="star1" title="Sucks"></label>
+    </fieldset>
+    <a class="label label-dark" style="color:yellow"><%=avg.toFixed(1) %><i class='fa fa-star'></i> </a> 
+  <ul>
+
+    <li>
+        <% if(user) { %>
+          <%if(thebot.data.rates.find(u => u.id === user.id)){%>
+          <a style="color:white;">your rating:<a class="label label-danger"style="color:white;padding:2px"> <%=thebot.data.rates.find(u => u.id === user.id).rate || 'N/A' %><i class='fa fa-star'></i></a> </a>        
+        <%} }%>
+    </li>
+  </ul>
+
+  </div>
+    </div>
+</div>
+<br/>
+<br/>
+<div class="modal fade" id="reportModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+ <div class="modal-dialog modal-dialog-centered" role="document">
+   <div class="modal-content main-bkg">
+     <div class="modal-header">
+         <h2 class="modal-title" id="exampleModalLongTitle" style="color: #fff;"><i class="fas fa-flag"></i> Report:</h2>
+       <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+         <span aria-hidden="true">&times;</span>
+       </button>
+     </div>
+     <div class="modal-body">
+       <form method="post" action="/bot/<%= thebot.data.id %>">
+         <div class="form-group">
+           <input type="text" name="name" value="report" style="display: none;">
+           <label for="reportReason">Reason: </label>
+           <input type="text" class="form-control" id="reportReason" aria-describedby="reportHelp" name="reason" placeholder="Bot's help command is not working." required>
+           <small id="reportHelp" class="form-text text-muted" style="color: red!important;">We reserve rights to decline any report with or without checking the bot.</small><br>
+           <p><strong>NOTE:</strong> You have to be logged in order to submit the report, make sure you are logged in otherwise you'll be redirected to login page and then you'll have to fill report again.</p>
+             <button type="button" class="btn btn-danger btn-lg" data-dismiss="modal" aria-label="Close" style="width: 49%;">Abort</button>
+             <button type="submit" class="btn btn-success btn-lg" style="width: 49%; float: right;">Report</button>
+         </div>
+
+       </form>
+   </div>
+ </div>
+</div>
+</div>
+<div class="container1" style="border-radius: 20px;padding: 2%;width: 100%;">
+    <div class="">
+        <div data-spy="scroll" class="tabbable-panel">
+            <div class="tabbable-line" style="background-color: inherit;">
+                <div class=""style="border-radius: 5px;">
+                    <div class="tab-pane active" id="tab_default_1">
+                        <div class=" main-bkg well-sm" style="border-radius: 5px;margin: 1%; color: #ffffff;">
+                          <h5  style="font-size:20px; ">Tags:</h5>
+														<% for (var i = 0; i < thebot.data.tags.length; i++) {
+															var tag = thebot.data.tags[i]
+														%>
+														<a style="background-color: #184f57; font-size: 14px;" class="badge badge-success" href="/tag/<%=tag%>"><i class="fas fa-tag"></i> <%=tag%></a>
+														<%  }; %>
+														<h5  style="font-size:20px; ">Developers:</h5>
+														<span onclick="window.location.href ='/profile/<%= thebot.data.mainOwner %>'" class="badge badge-success" style="font-size: 14px; background-color:#0c272a;"><img style="width: 16px; height: 16px;" src='<%= bot.users.get(thebot.data.mainOwner) ? bot.users.get(thebot.data.mainOwner).displayAvatarURL({ size: 16 }) : "/public/img/default.png" %>' class="img-raised rounded-circle img-fluid"> <%= bot.users.get(thebot.data.mainOwner) ? bot.users.get(thebot.data.mainOwner).tag : "Unknown#0000" %></span>
+														<% for (var i = 0; i < thebot.data.owners.length; i++) {
+															var owner = bot.users.get(thebot.data.owners[i]) ? bot.users.get(thebot.data.owners[i]).tag : "Unknown#0000"
+														%>
+															<span onclick="window.location.href ='/profile/<%= thebot.data.owners[i] %>'" class="badge badge-success" style="font-size: 14px; background-color:#0c272a;"><img style="width: 16px; height: 16px;" src='<%= bot.users.get(thebot.data.owners[i]) ? bot.users.get(thebot.data.owners[i]).displayAvatarURL({ size: 16 }) : "/public/img/default.png" %>' class="img-raised rounded-circle img-fluid"> <%= owner %></span>
+															<%  }; %>
+                            <h3 style="font-size:20px;">Description:</h3>
+                            <span style="max-width: 700px; word-break: break-word;"><%- md(thebot.data.longDesc) %></span>
+												</div>
+											</div>
+										</div>
+									</div>
+								</div>
+							</div>
+						</div>
+					</div>
+					<br/>
+				<br/>
+<style>
+
+fieldset, label { margin: 0; padding: 0; }
+h1 { font-size: 1.5em; margin: 10px; }
+
+
+.rating { 
+  border: none;
+  float: left;
+}
+
+.rating > input { display: none; } 
+.rating > label:before { 
+  margin: 5px;
+  font-size: 1.25em;
+  font-family: FontAwesome;
+  display: inline-block;
+  content: "\f005";
+}
+
+.rating > label { 
+  color: #ddd; 
+ float: right; 
+}
+
+.rating > input:checked ~ label, 
+.rating:not(:checked) > label:hover, 
+.rating:not(:checked) > label:hover ~ label { color: #FFD700;  } 
+
+.rating > input:checked + label:hover, 
+.rating > input:checked ~ label:hover,
+.rating > label:hover ~ input:checked ~ label, 
+.rating > input:checked ~ label:hover ~ label { color: #FFED85;  } 
+</style>
+<%- include('../blocks/footer') %>

@@ -1,0 +1,145 @@
+<%- include('../blocks/header', { bot, user, title: "Add Bot | Discord Bot House", embedding: { default: true } }) %>
+
+<meta name="description" content="Add your discord bot to Discord Bot House!">
+<meta name="og:title" property="og:title" content="New bot | Discord Bot House">
+<meta name="og:description" property="og:description" content="Add your discord bot to Discord Bot House!">
+<meta name="twitter:card" content="Add your discord bot to Discord Bot House!">
+
+<style>
+  .btn {
+    margin-top: 0px !important
+  }
+</style>
+
+<% if (sucess) { %>
+  <div class="alert alert-success" style="margin: 10px;" role="alert">
+    <%= sucess %>
+  </div>
+<% } %>
+
+<% if (fail) { %>
+  <div class="alert alert-danger" style="margin: 10px;" role="alert">
+    <%= fail %>
+  </div>
+<% } %>
+
+<div class="jumbotron main-bkg" style="margin: 10px; background-color:#113438; color: #ffffff;">
+  <form method="post">
+      <h2 style="bottom: -10px; position: relative;">Add Your Bot's Info</h2>
+      <hr>
+    <strong><span style="color: #ff0000">* = requiered field</span></strong><br><br>
+    <div class="form-group">
+      <label for="exampleSelect1" style="right: 100%;"><strong>Bot's Client ID <span style="color: #ff0000">*</span></strong></label>
+			<input type="text" aria-describedby="idHelp" style="width: 225px;" class="form-control mb-2 mr-sm-2 mb-sm-0" name="clientID" placeholder="560869129310175243" required>
+      <small id="idHelp" class="form-text">Your bot's user id.</small>
+    </div>
+
+    <div class="form-group">
+			<p style="font-size: 14px;"><strong>Library <span style="color: #ff0000">*</span></strong></p>
+			<select name="library"  data-width="225px" class="selectpicker" required aria-describedby=libraryHelp>
+          <option value="">Pick one...</option>
+          <option value="discordcr">discordcr</option>
+          <option value="Nyxx">Nyxx</option>
+          <option value="Discord.Net">Discord.Net</option>
+          <option value="DSharpPlus">DSharpPlus</option>
+          <option value="Nostrum">Nostrum</option>
+          <option value="coxir">coxir</option>
+          <option value="DiscordGo">DiscordGo</option>
+          <option value="Discord4J">Discord4J</option>
+          <option value="Javacord">Javacord</option>
+          <option value="JDA">JDA</option>]
+          <option value="discord.js">discord.js</option>
+          <option value="Eris">Eris</option>
+          <option value="Discordia">Discordia</option>
+          <option value="RestCord">RestCord</option>
+          <option value="Yasmin">Yasmin</option>
+          <option value="disco">disco</option>
+          <option value="discord.py">discord.py</option>
+          <option value="discordrb">discordrb</option>
+          <option value="serenity">serenity</option>
+          <option value="SwiftDiscord">SwiftDiscord</option>
+          <option value="Sword">Sword</option>
+          <option value="Other">Other</option>
+			</select>
+      <small id="libraryHelp" class="form-text">Library you use to code your bot.</small>
+		</div>
+
+    <div class="form-group">
+      <label for="exampleSelect1" style="right: 100%;"><strong>Prefix <span style="color: #ff0000">*</span></strong></label>
+      <input type="text" style="width: 225px;" class="form-control mb-2 mr-sm-2 mb-sm-0" name="prefix" placeholder="!" required>
+    </div>
+
+    <div class="form-group">
+        <label for="exampleSelect1" style="right: 100%;"><strong>Short Description <span style="color: #ff0000">*</span></strong></label>
+        <input type="text" aria-describedby="shortHelp" style="width: 100%;" class="form-control mb-2 mr-sm-2 mb-sm-0" name="shortDesc" placeholder="A multipurpose bot with alot of features." maxlength="89" required>
+        <small id="shortHelp" class="form-text">Your bot in maximum 89 characters.</small>
+    </div>
+
+    <div class="form-group">
+        <label for="exampleSelect1" style="right: 100%;"><strong>Long Description <span style="color: #ff0000">*</span></strong></label>
+        <span style="top: -5!important; position: relative!important;" class="form-text">A long description of your bot, HTML5, CSS and JavaScript allowed.</span>
+        <textarea type="text" style="width: 100%;" class="form-control mb-2 mr-sm-2 mb-sm-0 longdesc" id="longdesc" name="longdesc" placeholder="A small multipurpose bot with a wide range of features."></textarea>
+    </div>
+
+    <script>
+       var editor = CodeMirror.fromTextArea(document.getElementById('longdesc'), {mode: 'markdown', lineNumbers: true, theme: 'monokai'});
+    </script>
+
+  <div class="form-group">
+    <p style="font-size: 14px;"><strong>Tags <span style="color: #ff0000">*</span></strong></p>
+    <select multiple data-max-options="3" maxOptionsText="You can only add up to 3 tags." name="tags" style="width: 100%;" class="selectpicker" data-live-search="true" multiple required>
+    <option data-tokens="Music" value="Music">Music</option>
+    <option data-tokens="Moderation" value="Moderation">Moderation</option>
+    <option data-tokens="Fun" value="Fun">Fun</option>
+    <option data-tokens="Logging" value="Logging">Logging</option>
+    <option data-tokens="Role Management" value="Role Management">Role Management</option>
+    <option data-tokens="Game" value="Game">Game</option>
+    <option data-tokens="Meme" value="Meme">Meme</option>
+    <option data-tokens="Anime" value="Anime">Anime</option>
+    <option data-tokens="NSFW" value="NSFW">NSFW</option>
+    <option data-tokens="Social" value="Social">Social</option>
+    <option data-tokens="Web Dashboard" value="Web Dashboard">Web Dashboard</option>
+    <option data-tokens="Leveling" value="Leveling">Leveling</option>
+    <option data-tokens="Roleplay" value="Roleplay">Roleplay</option>
+    <option data-tokens="Utility" value="Utility">Utility</option>
+    <option data-tokens="Soundboard" value="Soundboard">Soundboard</option>
+    <option data-tokens="Statistics" value="Statistics">Statistics</option>
+    </select>
+    <small class="form-text">Tags describing your the bot best. (max 3)</small>
+  </div>
+
+  <div class="form-group">
+      <label for="exampleSelect1" style="right: 100%;"><strong>Support Server Invite <span style="color: #ff0000">*</span></strong></label><br>
+			<h5 style="float: left; position: relative;">https://discord.gg/</h5><input type="text" style="width: 100px;" class="form-control mb-2 mr-sm-2 mb-sm-0" name="supportServer" placeholder="ak7tde" required>
+      <small class="form-text">A valid discord invite to your bot's support server.</small>
+  </div>
+
+  <div class="form-group">
+      <label for="exampleSelect1" style="right: 100%;"><strong>Other owners of this bot</strong></label>
+			<input type="text" style="width: 100%;" class="form-control mb-2 mr-sm-2 mb-sm-0" name="otherOwners" placeholder="414764511489294347, 538855659714641960">
+      <small class="form-text">Maximum 3, you are already incuded.</small>
+  </div>
+
+  <div class="form-group">
+      <label for="exampleSelect1" style="right: 100%;"><strong>GitHub URL</strong></label>
+			<input type="text" style="width: 100%;" class="form-control mb-2 mr-sm-2 mb-sm-0" name="github" placeholder="https://github.com/MrAugu/lutu-bot">
+      <small class="form-text">Your GitHub repository URL, must be valid..</small>
+  </div>
+
+  <div class="form-group">
+      <label for="exampleSelect1" style="right: 100%;"><strong>Website URL</strong></label>
+			<input type="text" style="width: 100%;" class="form-control mb-2 mr-sm-2 mb-sm-0" name="website" placeholder="https://mybot.com">
+      <small class="form-text">Yourbot's website URL, must be valid.</small>
+  </div>
+
+  <div class="form-group">
+      <label for="exampleSelect1" style="right: 100%;"><strong>Invite URL [<a href="https://discordapi.com/permissions.html" target="_blank">Generator</a>]</strong></label>
+			<input type="text" style="width: 100%;" class="form-control mb-2 mr-sm-2 mb-sm-0" name="inviteURL">
+      <small class="form-text">An official discord invite link, if left empty, we will generate an invite without any extra permissions.</small>
+  </div>
+
+  <button type="submit" class="bot-button" style="border-radius: 5px 5px 5px 5px; width: 100%;">Submit</button>
+  </form>
+</div>
+<!--<div ><center><img  onclick="window.location.href ='/contact'" style="width:728px;height:90px;margin-bottom: 30px" src="https://www.resistivetechnosource.com/images/your_banner_here.png"></center></img></div>-->
+<%- include('../blocks/footer') %>

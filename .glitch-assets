@@ -1,0 +1,13 @@
+module.exports = {
+    "token": "process.env.token",
+    "dashboard": {
+      "oauthSecret": "process.env.oauthSecret",
+      "callbackURL": "process.env.callbackURL",
+      "sessionSecret": "process.env.sessionSecret",
+      "domain": "process.env.domain",
+      "port": 8080
+    },
+    "dbUrl": "process.env.dbUrl",
+    "admins": ["process.env.admins"],
+  };
+{"name":"profile.ejs","date":"2019-10-14T11:11:14.547Z","url":"https://cdn.glitch.com/ec259052-0b87-4f2d-9f16-15b0e88c9508%2Fprofile.ejs","type":"","size":11697,"thumbnail":"https://cdn.glitch.com/ec259052-0b87-4f2d-9f16-15b0e88c9508%2Fthumbnails%2Fprofile.ejs","thumbnailWidth":210,"thumbnailHeight":210,"uuid":"HGM2AMV8T6HfV15f"}

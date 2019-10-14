@@ -1,48 +1,50 @@
-# Hastebin Plus
-Hastebin Plus is an open-source Pastebin software written in node.js, which is easily installable in any network.  
-It bases upon [haste](https://github.com/seejohnrun/haste-server) and got enhanced in matters of **Design, Speed and Simplicity**.
+<<<<<<< HEAD
+# DBH
+Discord Bot House
+=======
+## About
+Lutu is an open source discord bot list with a handfull of features. No official instance of this list is online anymore. Use any list named *Discord Bot House* at your own risk.
 
-## Features
-* Paste code, logs and ... almost everything!
-* Syntax-Highlighting
-* Add static documents
-* Duplicate & edit pastes
-* Raw paste-view
+Special thanks to [Zaydme](https://github.com/Zaydme) for his contributions to the list.
+
+## Maintenance
+No new features are going to be implemented outside pull requests from peoples. All issues opened that require fixes will be fixed.
+
+For help & support join [MrAugu's Discord Server](https://discord.gg/rk7cVyk).
+
+To support this and many other projects, [become a patron](https://www.patreon.com/mraugu).
+
+## Requirments
+NodeJS - Optimal Version: `v12.3.1`
+
+NPM - Optimal Version: `v6.11.3`
+
+Git Command Line Interface - Optimal Version: `v2.7.4`
 
 ## Installation
-
-1. Remix this repository
-2. Open `config.json` and change the settings (if you want to)
-
-## Settings
-| Key                    | Description                                     | Default value |
-| ---------------------- | ----------------------------------------------- | ------------- |
-| `host`                 | The host the server runs on                     | `0.0.0.0`     |
-| `port`                 | The port the server runs on                     | `8080`        |
-| `dataPath`             | The directory where all pastes are stored       | `./data`      |
-| `keyLength`            | The length of the pastes' key                   | `10`          |
-| `maxLength`            | Maximum chars in a paste                        | `500000`      |
-| `createKey`            | Needs to be in front of paste to allow creation | ` `           |
-| `documents`            | Static documents to serve                       | See below     |
-
-### Default Config
-```json
-{
-	"host": "0.0.0.0",
-	"port": 8080,
-	"dataPath": "./data",
-	"keyLength": 10,
-	"maxLength": 500000,
-	"createKey": "",
-	"documents": {
-		"about": "./README.md",
-		"javaTest": "./documents/test.java"
-	}
-}
+Open your terminal and type commands below.
 ```
+cd Desktop
+git clone https://github.com/MrAugu/DBH
+cd DBH
+npm install
+```
+On your desktop a folder called `DBH` will be created, open it.
 
-## Authors
-* [haste](https://github.com/seejohnrun/haste-server): John Crepezzi - MIT License
-* [jQuery](https://github.com/jquery/jquery): MIT License
-* [highlight.js](https://github.com/isagalaev/highlight.js): Ivan Sagalaev - [License](https://github.com/isagalaev/highlight.js/blob/master/LICENSE)
-* [Application Icon](https://www.iconfinder.com/icons/285631/notepad_icon): [Paomedia](https://www.iconfinder.com/paomedia) - [CC BY 3.0 License](http://creativecommons.org/licenses/by/3.0/)
+Now open config.js file and set the required values appropriatley.
+
+To start the list use following command:
+
+**On Windows:**
+```
+node index
+```
+**On Linux:**
+```
+sudo node index
+```
+`sudo` is required in order to bind your application to port 80.
+
+## Need help setting up config.js or starting the list?
+For help & support join [MrAugu's Discord Server](https://discord.gg/rk7cVyk).
+>>>>>>> 3d599a51fa2a65b5fd4e4b64b43240505baf459c

@@ -1,0 +1,62 @@
+<%- include('blocks/header', { bot, user, title: "Developer Leaderboard | Discord Bot House", embedding: { default: true } }) %>
+
+<meta name="description" content="Discover the developers who use us through the leaderboard!">
+<meta name="og:title" property="og:title" content="Developers Leaderboard | Discord Bot House">
+<meta name="og:description" property="og:description" content="Discover the developers who use us through the leaderboard!">
+<meta name="twitter:card" content="Discover the developers who use us through the leaderboard!">
+
+<body ng-app="myModule">
+        <div class="container" style="width:auto;">
+            <div class="row">
+                <div class="col-md-12">
+                    <div class="tableHeader main-bkg-a"><i class="fas fa-chart-line" style="width:100%;"></i> Leaderboard</div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-md-12 ">
+                    <table class="table table-responsive-sm w-auto">
+                        <thead>
+                            <tr class="dev main-bkg-a " style="padding:10px;box-shadow: 5px 5px 10px black;background-color:#2b828e; color:white;">
+                                <th style="font-size:20px; text-align: center;">#</th>
+                                <th style="font-size:20px; text-align: center;">Dev Name</th>
+                                <th class="number">Monthly karma  <i class="glyphicon glyphicon-menu-up"></i></th>
+                                <th class="number">Total karma  <i class="fa fa-angle-double-up"></i></th>
+                            </tr>
+                        </thead>
+                        <tbody >
+                          <% for(var i=0; i < BestDevs.length; i++){  %>
+                            <tr class="dev">
+                                <td style="font-size:30px; text-align: center;"><%=i+1+(currentPage-1)*16%>
+                                <%if (i+(currentPage-1)*16 == 0) {%>
+                                    <i class="fas fa-crown"></i></i>
+                                <%}%></td>
+                                <td class="name">
+                                    <a href="/profile/<%=BestDevs[i].id%>" target="_blank">
+                                        <img class="profileImg" src='<%=pfps[i]%>'/>
+                                        <span><a  onclick="window.location.href ='/profile/<%= BestDevs[i].id %>'" style="color:white;background-color: #7499a0; font-size: 20px;" class="badge badge-success"><%=tags[i]%> <%if (BestDevs[i].certifiedDev == true) {%>
+                                            <span><i class="fas fa-certificate" style="color:rgb(255, 216, 118);"></i></span>
+                                        <%}%></a></span>
+
+                                    </a>
+                                </td>
+                                <td class="number" style="font-size:25px;"><a style="color:white;background-color: #184f57; font-size: 20px;" class="badge badge-success"><%=BestDevs[i].karma%></a></td>
+                                <td class="number" style="font-size:25px;"><a style="color:white;background-color: #ff6176; font-size: 20px;" class="badge badge-success"><%=BestDevs[i].totalKarma%></a></td>
+                                <% }; %>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+<br><br>
+<center><nav aria-label="...">
+        <ul class="pagination pagination-lg">
+          <% for (var i = 0; i < numberOfPages; i++) { %>
+            <li class="page-item"><a class="page-link" href="/leaderboard?page=<%= i + 1 %>"><%= i + 1 %></a></li>
+           <% } %>
+        </ul>
+      </nav></center>
+        </div>
+    </body>
+
+
+<%- include('blocks/footer') %>

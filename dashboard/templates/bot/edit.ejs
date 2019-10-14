@@ -1,0 +1,236 @@
+<%- include('../blocks/header', { bot, user, title: `Edit ${theBot.name} | Discord Bot House`, embedding: { default: true } }) %>
+<!-- <div ><center><img  onclick="window.location.href ='/contact'" style="width:728px;height:90px;margin-top: 30px" src="https://www.resistivetechnosource.com/images/your_banner_here.png"></center></img></div> -->
+<%
+  if (sucess) {
+%>
+<div class="alert alert-success progress-bar progress-bar-striped progress-bar-animated" role="progressbar" style="margin: 10px; border: none;" role="alert">
+  <%= sucess %>
+</div>
+<%
+  }
+%>
+
+<%
+  if (fail) {
+%>
+<div class="alert alert-danger bg-danger progress-bar progress-bar-striped progress-bar-animated" role="progressbar" style="margin: 10px; border: none;" role="alert">
+  <%= fail %>
+</div>
+<%
+  }
+%>
+<style>
+  /*MrAugu don't move this to dashboard.css*/
+  .btn {
+    margin-top: 0px !important
+  }
+  </style>
+<div class="jumbotron main-bkg" style="margin: 10px; background-color:#113438; color: #ffffff;">
+  <form method="post">
+    <h2 style="bottom: -10px; position: relative;">Edit Bot's Info</h2>
+    <hr>
+    <strong><span style="color: #ff0000">* = requiered field</span></strong><br><br>
+    <div class="form-group">
+      <label for="exampleSelect1" style="right: 100%;"><strong>Bot's Client ID <span style="color: #ff0000">*</span></strong></label>
+			<input type="text" style="width: 225px;" class="form-control mb-2 mr-sm-2 mb-sm-0" name="clientID" value="<%= theBot.id %>" placeholder="560869129310175243" required readonly>
+    </div>
+
+    <div class="form-group">
+			<p><strong>Library <span style="color: #ff0000">*</span></strong></p>
+			<select name="library"  data-width="225px" class="selectpicker" required>
+          <option value="" <%= theBot.library === "" ? "selected" : "" %>>Pick one...</option>
+          <option value="discordcr" <%= theBot.library === "discordcr" ? "selected" : "" %>>discordcr</option>
+          <option value="Nyxx" <%= theBot.library === "Nyxx" ? "selected" : "" %>>Nyxx</option>
+          <option value="Discord.Net" <%= theBot.library === "Discord.Net" ? "selected" : "" %>>Discord.Net</option>
+          <option value="DSharpPlus" <%= theBot.library === "DSharpPlus" ? "selected" : "" %>>DSharpPlus</option>
+          <option value="Nostrum" <%= theBot.library === "Nostrum" ? "selected" : "" %>>Nostrum</option>
+          <option value="coxir" <%= theBot.library === "coxir" ? "selected" : "" %>>coxir</option>
+          <option value="DiscordGo" <%= theBot.library === "DiscordGo" ? "selected" : "" %> >DiscordGo</option>
+          <option value="Discord4J" <%= theBot.library === "Discord4J" ? "selected" : "" %>>Discord4J</option>
+          <option value="Javacord" <%= theBot.library === "Javacord" ? "selected" : "" %>>Javacord</option>
+          <option value="JDA"<%= theBot.library === "JDA" ? "selected" : "" %>>JDA</option>]
+          <option value="discord.js" <%= theBot.library === "discord.js" ? "selected" : "" %>>discord.js</option>
+          <option value="Eris" <%= theBot.library === "Eris" ? "selected" : "" %>>Eris</option>
+          <option value="Discordia" <%= theBot.library === "Discordia" ? "selected" : "" %>>Discordia</option>
+          <option value="RestCord" <%= theBot.library === "RestCord" ? "selected" : "" %>>RestCord</option>
+          <option value="Yasmin" <%= theBot.library === "Yasmin" ? "selected" : "" %>>Yasmin</option>
+          <option value="disco" <%= theBot.library === "disco" ? "selected" : "" %>>disco</option>
+          <option value="discord.py" <%= theBot.library === "discord.py" ? "selected" : "" %>>discord.py</option>
+          <option value="discordrb" <%= theBot.library === "discordrb" ? "selected" : "" %>>discordrb</option>
+          <option value="serenity" <%= theBot.library === "serenity" ? "selected" : "" %>>serenity</option>
+          <option value="SwiftDiscord" <%= theBot.library === "SwiftDiscord" ? "selected" : "" %>>SwiftDiscord</option>
+          <option value="Sword" <%= theBot.library === "Sword" ? "selected" : "" %>>Sword</option>
+          <option value="Other" <%= theBot.library === "Other" ? "selected" : "" %>>Other</option>
+			</select>
+		</div>
+
+    <div class="form-group">
+      <label for="exampleSelect1" style="right: 100%;"><strong>Prefix <span style="color: #ff0000">*</span></strong></label>
+      <input type="text" style="width: 225px;" class="form-control mb-2 mr-sm-2 mb-sm-0" name="prefix" placeholder="!" value="<%= theBot.prefix %>" required>
+    </div>
+
+    <div class="form-group">
+        <label for="exampleSelect1" style="right: 100%;"><strong>Short Description <span style="color: #ff0000">*</span></strong></label>
+        <input type="text" style="width: 100%;" class="form-control mb-2 mr-sm-2 mb-sm-0" name="shortDesc" placeholder="A small multipurpose bot with a wide range of features." value="<%= theBot.shortDesc %>" maxlength="140" required>
+    </div>
+
+    <div class="form-group">
+        <label for="exampleSelect1" style="right: 100%;"><strong>Long Description <span style="color: #ff0000">*</span></strong></label>
+        <textarea type="text" style="width: 100%;" class="form-control mb-2 mr-sm-2 mb-sm-0 longdesc" value="<%= theBot.longDesc %>" id="longdesc" name="longdesc" placeholder="A small multipurpose bot with a wide range of features." required><%= theBot.longDesc %></textarea>
+    </div>
+
+    <script>
+
+        function request(opts, callback){
+          var xhr = new XMLHttpRequest()
+          xhr.onreadystatechange = function(){
+            if (xhr.readyState != 4) return
+            if (xhr.status >= 200 && xhr.status < 400) {
+              return callback(null, xhr.getResponseHeader("Content-Type") != null && xhr.getResponseHeader("Content-Type").indexOf("application/json") != -1 ? JSON.parse(xhr.responseText) : xhr.responseText, xhr)
+            }
+            var msg = xhr.responseText || "Error"
+            callback(Error(msg), null, xhr)
+          }
+          xhr.open(opts.method || "GET", opts.url)
+          for (var key in opts.headers) {
+            xhr.setRequestHeader(key, opts.headers[key])
+          }
+          xhr.send(opts.data)
+          return xhr
+        }
+
+        var editor = CodeMirror.fromTextArea(document.getElementById('longdesc'), {mode: 'markdown', lineNumbers: true, theme: 'monokai'});
+        editor.replaceSelection(document.getElementById("CODE").innerHTML, "");
+        function changeLang(el) {
+          var sections = document.querySelectorAll('.example');
+          for (var section of sections) {
+            section.style.display = 'none';
+          }
+          document.getElementById(el.value).style.display = 'block';
+        }
+        function changeType(el) {
+            document.querySelectorAll('.wtype').forEach(function(span){
+                if (el.value == "large") span.innerHTML = "";
+                else span.innerHTML = el.value + '/';
+            });
+            if (el.value == "large") document.getElementById('showAvatarDiv').style.display = 'none';
+            else document.getElementById('showAvatarDiv').style.display = 'block';
+            updateImage();
+            changeAvatar();
+        }
+        function changeAvatar() {
+            var el = document.getElementById('showAvatar');
+            if (el.checked) {
+                document.querySelectorAll('.qavatar').forEach(function(span){
+                    if (document.getElementById('typeselect').value == "large") span.innerHTML = "";
+                    else span.innerHTML = '?noavatar=true';
+                });
+            } else {
+                document.querySelectorAll('.qavatar').forEach(function(span){
+                    span.innerHTML = "";
+                });
+            }
+            updateImage();
+        }
+        function updateImage() {
+            var type = document.getElementById('typeselect').value;
+            var avatar = document.getElementById('showAvatar').checked;
+            console.log(type)
+            var url = "https://discordbots.org/api/widget/";
+            if (type != "large") url += type + "/";
+            url += ".svg";
+            if (type != "large" && avatar) url += "?noavatar=true"
+            document.getElementById('previewidget').src = url;
+        }
+        function showToken(el){
+            el.remove();
+            document.getElementById('token').style.display = 'block';
+        }
+        function closeModal(el) {
+            el.parentNode.classList.remove('is-active');
+            document.getElementById('previewframecontainer').innerHTML = "";
+          }
+        function githubChange(e) {
+          var r = /(https?:\/\/)?github.com\/[a-zA-Z0-9]+\/[a-zA-Z0-9]+/i;
+          var i = document.getElementById('githubimport')
+          if (e.value.match(r)) {
+            i.style.display = '';
+          } else {
+            i.style.display = 'none';
+          }
+        }
+        function importReadme(hasClickedTheFunLittleYesButtonOnThePopup) {
+          if (hasClickedTheFunLittleYesButtonOnThePopup) {
+            document.getElementById('importconfirm').classList.remove('is-active');
+            var git = document.getElementById('github').value;
+            git = git.replace(/(https?:\/\/)?github.com\//i, '');
+            request({url: 'https://raw.githubusercontent.com/'+git+'/master/README.md'}, function(err, res) {
+              if (err) return alert('There was a problem importing that readme :Thonk:');
+              document.getElementById('longdesc').value = res;
+              editor.setValue(res);
+            });
+          } else {
+            document.getElementById('importconfirm').classList.add('is-active');
+          }
+        }
+        githubChange(document.getElementById('github'));
+
+
+        </script>
+
+  <div class="form-group">
+    <p><strong>Tags <span style="color: #ff0000">*</span></strong></p>
+    <select data-max-options="3" name="tags" style="width: 100%;" class="selectpicker" data-live-search="true" multiple required>
+    <option data-tokens="Music" value="Music" <%= theBot.tags.includes("Music") ? "selected" : "" %>>Music</option>
+    <option data-tokens="Moderation" value="Moderation" <%= theBot.tags.includes("Moderation") ? "selected" : "" %>>Moderation</option>
+    <option data-tokens="Fun" value="Fun" <%= theBot.tags.includes("Fun") ? "selected" : "" %>>Fun</option>
+    <option data-tokens="Logging" value="Logging" <%= theBot.tags.includes("Logging") ? "selected" : "" %>>Logging</option>
+    <option data-tokens="Role Management" value="Role Management" <%= theBot.tags.includes("Role Management") ? "selected" : "" %>>Role Management</option>
+    <option data-tokens="Game" value="Game" <%= theBot.tags.includes("Game") ? "selected" : "" %>>Game</option>
+    <option data-tokens="Meme" value="Meme" <%= theBot.tags.includes("Meme") ? "selected" : "" %>>Meme</option>
+    <option data-tokens="Anime" value="Anime" <%= theBot.tags.includes("Anime") ? "selected" : "" %>>Anime</option>
+    <option data-tokens="Social" value="Social" <%= theBot.tags.includes("Social") ? "selected" : "" %>>Social</option>
+    <option data-tokens="Web Dashboard" value="Web Dashboard" <%= theBot.tags.includes("Web Dashboard") ? "selected" : "" %>>Web Dashboard</option>
+    <option data-tokens="Leveling" value="Leveling" <%= theBot.tags.includes("Leveling") ? "selected" : "" %>>Leveling</option>
+    <option data-tokens="Roleplay" value="Roleplay" <%= theBot.tags.includes("Roleplay") ? "selected" : "" %>>Roleplay</option>
+    <option data-tokens="Utility" value="Utility" <%= theBot.tags.includes("Utility") ? "selected" : "" %>>Utility</option>
+    <option data-tokens="Soundboard" value="Soundboard" <%= theBot.tags.includes("Soundboard") ? "selected" : "" %>>Soundboard</option>
+    <option data-tokens="Statistics" value="Statistics" <%= theBot.tags.includes("Statistics") ? "selected" : "" %>>Statistics</option>
+    </select>
+  </div>
+
+  <div class="form-group">
+      <label for="exampleSelect1" style="right: 100%;"><strong>Support Server Invite <span style="color: #ff0000">*</span></strong></label><br>
+			<h5 style="float: left; top: 6px!important; position: relative;">https://discord.gg/</h5><input type="text" style="width: 100px;" class="form-control mb-2 mr-sm-2 mb-sm-0" name="supportServer" placeholder="ak7tde" value="<%= theBot.server.split("/")[3] %>" required>
+  </div>
+
+  <div class="form-group">
+    <label for="exampleSelect1" style="right: 100%;"><strong>Main owner of this bot <span style="color: #ff0000">*</span></strong></label>
+    <input type="text" style="width: 100%;" class="form-control mb-2 mr-sm-2 mb-sm-0" name="mainOwner" value="<%= theBot.mainOwner %>" placeholder="538855659714641960" required>
+</div>
+
+  <div class="form-group">
+      <label for="exampleSelect1" style="right: 100%;"><strong>Other owners of this bot</strong></label>
+			<input type="text" style="width: 100%;" class="form-control mb-2 mr-sm-2 mb-sm-0" name="otherOwners" value="<%= theBot.owners.join(", ") || "" %>" placeholder="414764511489294347, 538855659714641960">
+  </div>
+
+  <div class="form-group">
+      <label for="exampleSelect1" style="right: 100%;"><strong>GitHub URL</strong></label>
+			<input type="text" style="width: 100%;" class="form-control mb-2 mr-sm-2 mb-sm-0" value="<%= theBot.github %>" name="github" placeholder="https://github.com/MrAugu/lutu-bot">
+  </div>
+
+  <div class="form-group">
+      <label for="exampleSelect1" style="right: 100%;"><strong>Website URL</strong></label>
+			<input type="text" style="width: 100%;" class="form-control mb-2 mr-sm-2 mb-sm-0" value="<%= theBot.website %>" name="website" placeholder="https://mybot.com">
+  </div>
+
+  <div class="form-group">
+      <label for="exampleSelect1" style="right: 100%;"><strong>Invite URL [<a href="https://discordapi.com/permissions.html" target="_blank">Generator</a>]</strong></label>
+			<input type="text" style="width: 100%;" class="form-control mb-2 mr-sm-2 mb-sm-0" value="<%= theBot.invite %>" name="inviteURL">
+  </div>
+
+  <button type="submit" class="btn bot-button" style="max-width:200px">Submit</button>
+  </form>
+</div>
+<!--<div ><center><img  onclick="window.location.href ='/contact'" style="width:728px;height:90px;margin-bottom: 30px" src="https://www.resistivetechnosource.com/images/your_banner_here.png"></center></img></div>-->
+<%- include('../blocks/footer') %>
