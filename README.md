@@ -1,50 +1,37 @@
-<<<<<<< HEAD
-# DBH
-Discord Bot House
-=======
-## About
-Lutu is an open source discord bot list with a handfull of features. No official instance of this list is online anymore. Use any list named *Discord Bot House* at your own risk.
+Welcome to Glitch
+=================
 
-Special thanks to [Zaydme](https://github.com/Zaydme) for his contributions to the list.
+Click `Show` in the header to see your app live. Updates to your code will instantly deploy and update live.
 
-## Maintenance
-No new features are going to be implemented outside pull requests from peoples. All issues opened that require fixes will be fixed.
+**Glitch** is the friendly community where you'll build the app of your dreams. Glitch lets you instantly create, remix, edit, and host an app, bot or site, and you can invite collaborators or helpers to simultaneously edit code with you.
 
-For help & support join [MrAugu's Discord Server](https://discord.gg/rk7cVyk).
+Find out more [about Glitch](https://glitch.com/about).
 
-To support this and many other projects, [become a patron](https://www.patreon.com/mraugu).
 
-## Requirments
-NodeJS - Optimal Version: `v12.3.1`
+Your Project
+------------
 
-NPM - Optimal Version: `v6.11.3`
+### ← README.md
 
-Git Command Line Interface - Optimal Version: `v2.7.4`
+That's this file, where you can tell people what your cool website does and how you built it.
 
-## Installation
-Open your terminal and type commands below.
-```
-cd Desktop
-git clone https://github.com/MrAugu/DBH
-cd DBH
-npm install
-```
-On your desktop a folder called `DBH` will be created, open it.
+### ← index.html
 
-Now open config.js file and set the required values appropriatley.
+Where you'll write the content of your website. 
 
-To start the list use following command:
+### ← style.css
 
-**On Windows:**
-```
-node index
-```
-**On Linux:**
-```
-sudo node index
-```
-`sudo` is required in order to bind your application to port 80.
+CSS files add styling rules to your content.
 
-## Need help setting up config.js or starting the list?
-For help & support join [MrAugu's Discord Server](https://discord.gg/rk7cVyk).
->>>>>>> 3d599a51fa2a65b5fd4e4b64b43240505baf459c
+### ← script.js
+
+If you're feeling fancy you can add interactivity to your site with JavaScript.
+
+### ← assets
+
+Drag in `assets`, like images or music, to add them to your project
+
+Made by [Glitch](https://glitch.com/)
+-------------------
+
+\ ゜o゜)ノ
