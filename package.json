@@ -1,0 +1,25 @@
+{
+  "name": "ghost",
+  "version": "0.0.1",
+  "description": "What am I about?",
+  "scripts": {
+    "start": "bash init.sh && node node_modules/ghost/index"
+  },
+  "dependencies": {
+    "ghost": "^3.1.0",
+    "ghost-cli": "^1.13.1",
+    "knex-migrator": "^3.4.1"
+  },
+  "engines": {
+    "node": "11.x"
+  },
+  "repository": {
+    "url": "https://glitch.com/edit/#!/ghost"
+  },
+  "license": "MIT",
+  "keywords": [
+    "node",
+    "glitch",
+    "express"
+  ]
+}
